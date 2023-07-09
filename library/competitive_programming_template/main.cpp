@@ -91,12 +91,15 @@ namespace sss
 
 		// 可変引数テンプレート
 		// https://cpprefjp.github.io/lang/cpp11/variadic_templates.html
-		//template<class Head, class... Tail>
-		//void Output(const std::vector<Head>& head, const std::vector<Tail>&... tail)
-		//{
-		//	OutputLine(head);
-		//	Output(tail...);
-		//}
+		template<class T>
+		void Output() {}
+
+		template<class Head, class... Tail>
+		void Output(const Head& head, const Tail&... tail)
+		{
+			OutputLine(head);
+			Output(tail...);
+		}
 
 	} // namespace io
 
@@ -144,9 +147,7 @@ private:
 	static void Output(const Solution& solution)
 	{
 		// mock
-		sss::io::OutputLine(solution.mock);
-		sss::io::OutputLine(solution.isMock);
-		sss::io::OutputLine(solution.mocks);
+		sss::io::Output(solution.mock, solution.isMock, solution.mocks);
 	}
 };
 
