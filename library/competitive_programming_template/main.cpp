@@ -123,8 +123,8 @@ private:
 	{
 		// mock
 		int mock;
+		std::vector<int> mocks;
 	};
-
 	struct Solution
 	{
 		// mock
@@ -137,16 +137,24 @@ private:
 	{
 		// mock
 		std::cin >> input.mock;
-	}
+		input.mocks.resize(input.mock);
 
-	static void Solve(InputData& input, Solution& solution)
-	{
+		std::for_each(
+			std::begin(input.mocks), std::end(input.mocks),
+			[](auto& value)
+			{
+				std::cin >> value;
+			}
+		);
 	}
-
 	static void Output(const Solution& solution)
 	{
 		// mock
 		sss::io::Output(solution.mock, solution.isMock, solution.mocks);
+	}
+
+	static void Solve(InputData& input, Solution& solution)
+	{
 	}
 };
 
