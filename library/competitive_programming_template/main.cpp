@@ -40,24 +40,50 @@ namespace sss
 		}
 
 		template<class T>
-		void OutputLine(const std::vector<T>& collection)
+		void OutputLine(const std::vector<T>& collection, const bool isReverse)
 		{
 			if (collection.empty()) {
 				return;
 			}
 
-			OutputData(collection.front());
+			OutputData(isReverse ? collection.back() : collection.front());
 
-			std::for_each(
-				std::next(std::cbegin(collection)), std::cend(collection),
-				[&](const auto& value)
-				{
-					OutputData(SPACE);
-					OutputData(value);
-				}
-			);
+			if (isReverse) {
+				std::for_each(
+					std::next(std::crbegin(collection)),
+					std::crend(collection),
+					[&](const auto& value)
+					{
+						OutputData(SPACE);
+						OutputData(value);
+					}
+				);
+			}
+			else {
+				std::for_each(
+					std::next(std::cbegin(collection)),
+					std::cend(collection),
+					[&](const auto& value)
+					{
+						OutputData(SPACE);
+						OutputData(value);
+					}
+				);
+			}
 
 			OutputData(NEW_LINE);
+		}
+
+		template<class T>
+		void OutputLine(const std::vector<T>& collection)
+		{
+			OutputLine(collection, false);
+		}
+
+		template<class T>
+		void OutputLineReverse(const std::vector<T>& collection)
+		{
+			OutputLine(collection, true);
 		}
 
 		// 可変引数テンプレート
