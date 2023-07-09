@@ -91,7 +91,6 @@ namespace sss
 
 		// 可変引数テンプレート
 		// https://cpprefjp.github.io/lang/cpp11/variadic_templates.html
-		template<class T>
 		void Output() {}
 
 		template<class Head, class... Tail>
